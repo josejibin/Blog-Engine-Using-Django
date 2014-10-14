@@ -1,0 +1,128 @@
+<!-- Single blog post entry-->
+
+{% extends "base.html" %}
+{% block content %}
+<!-- body content: posts and side bar-->
+<div class="container">
+ <div class="row">
+   <div class="col-md-9">
+    <div class="well"
+    <!-- heading -->
+    {% for post in posts %}
+     <h1><a href="/posts/{{ post.slug }}">{{ post.title }}</a></h1>
+    <!-- content posts -->
+     <article>
+        <div class="row">
+           <div class="group2 col-sm-6 col-md-6">
+                <span class="glyphicon glyphicon-pencil"></span> <a href="/#">2 comments </a>                              
+                <span class="glyphicon glyphicon-time"></span>posted on {{  post.pub_date }}                       
+           </div>
+        </div>
+        <br>
+                  
+        <p class="lead"> {{ post.text }}</p>
+        <hr>
+     </article>
+   
+    <div > 
+        <form action="/post/" method="post" role="form" class="clearfix">
+            <button type="submit" class="btn btn-danger btn btn-primary btn-xs pull-right" name="option" value="Delete">Delete this post</button>
+        </form>
+                  
+    </div>
+</div>
+
+    </div><!-- closing of class col md-8-->
+    <!-- showing comments--> 
+  </div><!-- closing of row div-->  
+
+  <div class="col-md-9 form-group">
+    <div class="well">
+    <div class="container">
+
+    <h4>COMMENTS:</h4>
+    {% for comment in comments %}
+    <p>{{ comment.commentor }} Says : {{ comment.comment_text }}<br>
+        on {{ comment.comment_date }}</p>
+    {% endfor %}
+
+</div>
+</div>
+</div>
+            
+  
+
+<!-- comment form-->
+    <div class="col-md-9 form-group">
+    <div class="well">
+    <div class="container">
+   
+ 
+       
+       
+       
+        <form action="{{ post.slug }} " class="form-horizontal" method="post">{% csrf_token %}
+    <fieldset>
+        <h4>Leave a comment</h4>
+        {% for field in form %}
+            {% if field.errors %}
+                <div class="control-group error">
+                    <label class="control-label">{{ field.label }}</label> 
+                    <div class="controls">{{ field }}
+                        <span class="help-inline">
+                            {% for error in  field.errors %}{{ error }}{% endfor %}
+                        </span>
+                    </div>
+                </div>
+            {% else %}
+                <div class="control-group">
+                    <label class="control-label">{{ field.label }}</label> 
+                    <div class="controls">{{ field }}
+                        {% if field.help_text %}
+                            <p class="help-inline"><small>{{ field.help_text }}</small></p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </fieldset>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary" >Submit</button>
+    </div>
+</form>
+
+
+    </div>        
+    </div>
+     {% endfor %}
+</div>
+    
+</div><!-- closing of container div-->
+
+{% endblock %}
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

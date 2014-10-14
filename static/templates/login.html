@@ -1,0 +1,42 @@
+{% extends "base1.html" %}
+{% block content %}
+
+  
+
+    <div class="container">
+       <div class="col-md-4 form-group">
+      <form class="form-signin" method="post" role="form">
+        {% csrf_token %}
+        <h2 class="form-signin-heading">Please Login</h2>
+        {% for field in form %}
+            {% if field.errors %}
+                <div class="control-group error">
+                    <label class="control-label">{{ field.label }}</label> 
+                    <div class="controls">{{ field }}
+                        <span class="help-inline">
+                            {% for error in  field.errors %}{{ error }}{% endfor %}
+                        </span>
+                    </div>
+                </div>
+            {% else %}
+                <div class="">
+                    <label class="control-label">{{ field.label }}</label> 
+                    <div class="controls">{{ field }}
+                        {% if field.help_text %}
+                            <p class="help-inline"><small>{{ field.help_text }}</small></p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+       <br>
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">LOGIN</button>
+      </form>
+    </div>
+</div>
+    </div> <!-- /container -->
+
+{% endblock %}

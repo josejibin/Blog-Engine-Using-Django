@@ -1,0 +1,28 @@
+<!-- New post page of J's blog-->
+
+{% extends "base.html" %}
+{% block content %}
+
+
+ 
+    <div class="container">
+        <div class="col-md-9 form-group">
+        <div class="well">
+            <h2>New Post Entry</h2>
+            <form action="/newpost/" method="post" role="form" class="clearfix" class="form-horizontal">
+            {% csrf_token %}
+            
+            {{ form.as_ul }}
+            <div class="col-md-10 form-group text-right">
+                <button type="submit" class="btn btn-primary" name="publish" value="publish">Publish</button>
+            </div>
+ 
+            </form>                   
+        </div>
+    </div>
+
+    </div>
+
+{% endblock %}
+
+       
